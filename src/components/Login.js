@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { loginWithGoogle } from '../helpers/auth';
 import { firebaseAuth } from '../config/constants';
+
+import headerImage from '../images/headerImage.png';
 const firebaseAuthKey = 'firebaseAuthInProgress';
 const appTokenKey = 'appToken';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,7 @@ export default class Login extends Component {
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
   }
   handleGoogleLogin() {
-    loginWithGoogle().catch(err => {
+    loginWithGoogle().catch((err) => {
       localStorage.removeItem(firebaseAuthKey);
     });
     // this will set the splashscreen until its overridden by the real firebaseAuthKey
@@ -22,7 +25,7 @@ export default class Login extends Component {
       this.props.history.push('/app/home');
       return;
     }
-    firebaseAuth().onAuthStateChanged(user => {
+    firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         localStorage.removeItem(firebaseAuthKey);
         localStorage.setItem(appTokenKey, user.uid);
@@ -39,10 +42,11 @@ export default class Login extends Component {
 const loginButtonUrl =
   'https://firebasestorage.googleapis.com/v0/b/doppelganger-app.appspot.com/o/google-icon-white.png?alt=media&token=ff891c5f-f2a4-441e-b457-d71b9b21762f';
 const styles = {
-  backgroundImage: `url(${loginButtonUrl})`
+  backgroundImage: `url(${loginButtonUrl})`,
 };
 const LoginPage = ({ handleGoogleLogin }) => (
   <div className="login-container">
+    <img className="header-image" alt="digiinote header" src={headerImage} />
     <div onClick={handleGoogleLogin} className="login-button">
       <div style={styles} className="google-logo">
         <span className="button-text">Sign In With Google</span>
@@ -50,4 +54,4 @@ const LoginPage = ({ handleGoogleLogin }) => (
     </div>
   </div>
 );
-const Splashscreen = () => <p>Please Wait Loading...</p>;
+const Splashscreen = () => <p className="subheader">Please Wait Loading...</p>;

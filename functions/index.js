@@ -6,7 +6,7 @@ let Promise = require('promise');
 admin.initializeApp(functions.config().firebase);
 const db = admin.firestore();
 
-exports.addSimilarImages = functions.firestore
+exports.annotateImage = functions.firestore
   .document('photos/{document}')
   .onCreate((snap, context) => {
     console.log('SNAP', snap);
@@ -19,25 +19,17 @@ exports.addSimilarImages = functions.firestore
 
     return Promise.resolve()
       .then(() => {
-        return visionClient.webDetection(photoUrl);
+        return visionClient.textDetection(photoUrl);
       })
       .then(results => {
-        console.log('VISION data all is: ', results);
-        const webDetection = results[0].webDetection;
-
-        let similarImages = [];
-        if (webDetection.visuallySimilarImages.length) {
-          webDetection.visuallySimilarImages.forEach(image => {
-            similarImages.push(image);
-          });
-        }
-
-        console.log('similarImages', similarImages);
+        console.log('VISION data all is: ', results[0].fullTextAnnotation.text);
+        const textDetection = results[0].fullTextAnnotation.text;
+        console.log('annotation', textDetection);
 
         db.collection('photos')
           .doc(context.params.document)
-          .update({ similarImages })
-          .then(res => console.log('dopples added'))
+          .update({ textDetection })
+          .then(res => console.log('annotation added'))
           .catch(err => console.error(err));
       })
       .catch(err => console.error(err));

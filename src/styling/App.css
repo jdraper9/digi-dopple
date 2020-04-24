@@ -11,6 +11,8 @@ body {
   margin: 0 auto;
   height: 100vh;
   width: 100%;
+  background-image: url('../images/background.jpg');
+  background-size: auto;
 }
 .login-button {
   height: 100px;
@@ -22,16 +24,18 @@ body {
   margin: 0 auto;
 }
 .login-container {
-  background: #ffc107;
+  background: rgb(255, 193, 7, 0.2);
   width: 100%;
   height: 100vh;
+  border-radius: 10px;
+  margin-top: 5px;
 }
 .button-text {
   position: relative;
   font-size: 25px;
   color: white;
   line-height: 50px;
-  left: 90px;
+  left: 130px;
 }
 .google-logo {
   height: 50px;
@@ -80,11 +84,12 @@ body {
 
 .card-1.card.loading-card {
   padding-top: 30px !important;
+  width: 100%;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 30px;
 }
 
 .testimonial-group {
@@ -98,16 +103,6 @@ body {
 .testimonial-group > .row > .col-xs-4 {
   display: inline-block;
   float: none;
-}
-
-.main-photo {
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100px;
-  width: 100px;
-  margin: 20px;
-  border-radius: 50%;
 }
 
 .main-close {
@@ -205,4 +200,29 @@ body {
 .bottom-icon {
   font-size: 35px;
   line-height: 44px;
+}
+
+.annotation {
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+
+  height: 80vh;
+  max-height: 80vh;
+  min-height: 80vh;
+}
+
+.images-wrapper {
+  padding-bottom: 60px !important;
+}
+
+.header-image {
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subheader {
+  text-align: center;
 }
